@@ -1,0 +1,12 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Mon Aug 29 14:45:07 2022
+//! **************************************************************************
+
+SCHEMATIC START;
+TIMEGRP clk = BEL "in1_reg_0" BEL "in1_reg_1" BEL "in1_reg_2" BEL "in1_reg_3"
+        BEL "in1_reg_4" BEL "in2_reg_0" BEL "in2_reg_1" BEL "in2_reg_2" BEL
+        "in2_reg_3" BEL "in2_reg_4" BEL "out_0" BEL "out_1" BEL "out_2" BEL
+        "out_3" BEL "out_4" BEL "clk_BUFGP/BUFG";
+TS_clk = PERIOD TIMEGRP "clk" 2.2 ns HIGH 50%;
+SCHEMATIC END;
+

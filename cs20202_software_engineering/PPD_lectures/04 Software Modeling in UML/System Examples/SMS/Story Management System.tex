@@ -1,0 +1,434 @@
+\documentclass{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{marginnote}
+%\usepackage{longtable}
+
+%\usepackage{color}
+%\usepackage{listings}
+
+\usepackage{framed}
+\usepackage{textpos}
+
+\renewcommand{\baselinestretch}{1}
+\renewcommand{\arraystretch}{1.3}
+
+%you may inactive the following four commands, then it will become appearance of book pages
+
+\setlength{\topmargin}{-0.4in}
+%\setlength{\topmargin}{-0.1in}
+\setlength{\textheight}{9in}
+%\setlength{\textheight}{8.3in}
+\setlength{\evensidemargin}{-0.4 in}
+\setlength{\oddsidemargin}{-0.4 in}
+%\setlength{\oddsidemargin}{0.1 in}
+\setlength{\textwidth}{7 in}
+%\setlength{\textwidth}{6.2 in}
+
+%%%%%%%%%%%%%
+
+\newtheorem{fact}{Fact}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{property}{Property}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{Conjecture}
+
+\newcommand{\notsim}{{\, \not \sim \,}}
+
+\newcommand{\F}{\ensuremath{\mathbb F}}
+\newcommand{\Z}{\ensuremath{\mathbb Z}}
+\newcommand{\N}{\ensuremath{\mathbb N}}
+\newcommand{\Q}{\ensuremath{\mathbb Q}}
+\newcommand{\R}{\ensuremath{\mathbb R}}
+\newcommand{\C}{\ensuremath{\mathbb C}}
+
+\newcommand{\done}{\hfill $\Box$ }
+\newcommand{\rmap}{\stackrel{\rho}{\leftrightarrow}}
+\newcommand{\mys}{\vspace{0.15in}}
+
+\newcommand{\ebu}{{\bf{e}}}
+\newcommand{\Abu}{{\bf{A}}}
+\newcommand{\Bbu}{{\bf{B}}}
+
+\newcommand{\abu}{{\bf{a}}}
+\newcommand{\abuj}{{\bf{a_j}}}
+\newcommand{\bbu}{{\bf{b}}}
+\newcommand{\vbu}{{\bf{v}}}
+\newcommand{\ubu}{{\bf{u}}}
+\newcommand{\dbu}{{\bf{d}}}
+\newcommand{\tbu}{{\bf{t}}}
+\newcommand{\cbu}{{\bf{c}}}
+\newcommand{\kbu}{{\bf{k}}}
+\newcommand{\hbu}{{\bf{h}}}
+\newcommand{\sbu}{{\bf{s}}}
+\newcommand{\wbu}{{\bf{w}}}
+\newcommand{\xbu}{{\bf{x}}}
+\newcommand{\ybu}{{\bf{y}}}
+\newcommand{\zbu}{{\bf{z}}}
+
+
+\newcommand{\corres}{\leftrightarrow}
+
+\newcommand{\zero}{{\bf{0}}}
+\newcommand{\one}{{\bf{1}}}
+\newcommand{\nodiv}{{\, \not| \,}}
+\newcommand{\notequiv}{{\,\not\equiv\, }}
+
+%%%%%%%%%%%%%%
+
+\def\comb#1#2{{#1 \choose #2}}
+\newcommand{\ls}[1]
+    {\dimen0=\fontdimen6\the\font\lineskip=#1\dimen0
+     \advance\lineskip.5\fontdimen5\the\font
+     \advance\lineskip-\dimen0
+     \lineskiplimit=0.9\lineskip
+     \baselineskip=\lineskip
+     \advance\baselineskip\dimen0
+     \normallineskip\lineskip\normallineskiplimit\lineskiplimit
+     \normalbaselineskip\baselineskip
+     \ignorespaces}
+
+\def\stir#1#2{\left\{#1 \atop #2 \right\}}
+\def\dsum#1#2{#1 \atop #2 }
+\def\defn{\stackrel{\triangle}{=}}
+
+%%%%%%%%
+
+
+
+\begin{document}
+
+\thispagestyle{plain}
+\setcounter{page}{1}
+
+\begin{center}
+{\huge {\bf Indian Institute of Technology, Kharagpur}} 
+
+{\LARGE {\em Department of Computer Science and Engineering}}
+\vspace{0.4cm}
+
+{\Large \bf Software Engineering (CS 20006), Spring 2015-16} \vspace{0.1cm}
+
+{\large \bf Story Management System (PMS)} \vspace{0.1cm}
+
+{\large \em Req. Spec., and Outline of Analysis, and Design} %\vspace{0.3cm}
+\end{center}
+
+\hspace{-1cm}
+
+\begin{tabular}{l}
+\hspace{16cm} \\ \hline 
+\end{tabular}
+
+\begin{enumerate}
+
+\item A \textsf{Newspaper House} publishes daily newspaper and wants to manage its activities through a {\bf Story Management System (SMS)}. You are to develop the {\bf SMS}. The requirements specification of the system is given below. Read the specifications carefully, analyse the requirements, and design the following aspects of the system using UML and DP. 
+\begin{enumerate}
+\item \label{Use_Cases} Identify the use-cases and design suitable Use-Case Diagrams for {\bf SMS}. Highlight the relationships amongst the actors and the use-cases. %\hfill [{\bf 5}]
+\item \label{Select_Classes} Design Class Diagrams for {\em Story}, detailing the attributes and operations with their properties. %\hfill [{\bf 5}]
+\item \label{State-chart} Show the State-chart Diagram for a {\em Story} as it passes through the {\bf SMS}. %\hfill [{\bf 5}]
+\item \label{Class-Diagram} Show all other classes / objects (in addition to Question~\ref{Select_Classes}) by brief Class Diagrams (with name and key attributes). For the entire collection of classes (that is, including {\em Story}) show the associations, aggregations/compositions, generalization/specialization, and abstract/concrete etc. %\hfill [{\bf 10}]
+\item \label{Sequence-Diagrams} Design suitable Sequence Diagrams for use-cases arising from {\em Submit} (of {\em Reporter}), {\em Review} (of {\em Manager}), {\em Revise} (of {\em Reporter}), and {\em Approve} (of {\em Manager}) actions. %\hfill [{\bf 10}]
+\item \label{Design Patterns} Choose appropriate Design Patterns for your design. Briefly justify your choice. %\hfill [{\bf 5}]
+\end{enumerate}
+
+\begin{center}
+{\bf \underline{Requirements Specification for Story Management System (SMS)}}
+\end{center}
+
+\begin{enumerate}
+\item The staff structure of the \textsf{Newspaper House} is as follows:
+
+\begin{itemize}
+
+\item {\em Editor}. The {\em Editor} is responsible for the overall activities and directly manages the {\em Editorial Division}. 
+\item {\em Associate Editor}s. Every {\em Associate Editor} is responsible for a {\em Division} and reports to the {\em Editor}. No {\em Associate Editor} manages more than one {\em Division}.
+\item {\em Reporter}s. Every {\em Reporter} works for a {\em Division} and reports to the corresponding {\em Associate Editor}. {\em Reporter}s working for the {\em Editorial Division} reports directly to the {\em Editor}.
+\end{itemize}
+
+Every employee is identified by the {\em Employee Code}, and has {\em Name}, {\em Email} and {\em Mobile Number}.
+
+\item The \textsf{Newspaper House} has 3 {\em Divisions}:
+
+\begin{itemize}
+\item {\em Editorial Division}: This publishes the {\em Editorial} expressing the views of the \textsf{Newspaper House}, {\em Special News Items} and the {\em Letters from Readers}. 
+\item {\em News Division}: This publishes stories on national and international news. A story here is political, social or economic in nature. 
+\item {\em Features Division}: This publishes national and international feature stories in art, culture, cinema, sports, and the like. A story here is an entertainment event report, critique, celebrity interview, match report, team analysis, or statistics.
+%\item {\em Sports Division}: This publishes stories on national and international sports. A story here is a match report, team analysis, statistics, or player interview.
+%\item {\em Entertainment Division}: This publishes stories on national and international entertainment (art, cinema, theatre etc). A story here is an entertainment event report, critique, or celebrity interview.
+\end{itemize}
+
+Every {\em Division} has a {\em Manager}. With the exception of the {\em Editorial Division}, every {\em Division} is managed by an {\em Associate Editor}. The {\em Editorial Division} is managed directly by the {\em Editor}. 
+
+\item At the \textsf{Newspaper House} a {\em Reporter} needs to:
+
+\begin{itemize}
+\item {\em Collect}: A reporter goes to places or liaison with external agencies to collect news items.
+\item {\em Compose}: A collected news item is cast in the form of a story.
+\item {\em Submit}: A completed story is submitted to the corresponding {\em Manager}. 
+\item {\em Revise}: Up on review, if the {\em Manager} desires, the story is revised and re-submitted.
+\end{itemize}
+
+\item At the \textsf{Newspaper House} the responsibilities of an {\em Associate Editor} include all responsibilities of a {\em Reporter}. Naturally she / he can report their own stories. In addition, an {\em Associate Editor} needs to:
+
+\begin{itemize}
+\item {\em Review}: A story submitted by a reporter (of the {\em Division}) needs to reviewed and edited. Up on review, the {\em Associate Editor} may request the {\em Reporter} to revise and re-submit.
+\item {\em Approve}: A submitted story may and may not be approved -- with or without revision.
+\item {\em Paginate}: Compose the day's page/s with the approved stories of the {\em Division}.
+%\item {\em Manage}: Perform all people and task management activities for the {\em Division}.
+\end{itemize}
+
+\item At the \textsf{Newspaper House} the responsibilities of the {\em Editor} include all responsibilities of an {\em Associate Editor} (and hence those of a {\em Reporter}). In addition, the {\em Editor} needs to:
+
+\begin{itemize}
+\item {\em Edit}: Manage the {\em Editorial Division}, write the editorial, and set \& comply with the policies for the \textsf{Newspaper House}.
+%\item {\em Manage}: Perform all people and task management activities for the \textsf{Newspaper House} and look after the business interests of the owners.
+\end{itemize}
+
+\item A {\em Story}:
+\begin{itemize}
+\item Is a piece of text for publication in the newspaper.
+\item Has title, place, date-time, sources (optional), and reporter / associate editor (optional).
+\item Is of a type that matches the {\em Division} in which it is published.
+\item Has a nature as specified above under different {\em Division}s.
+\end{itemize}
+
+\item The {\em Work flow} in the \textsf{Newspaper House} is as follows: 
+
+\begin{itemize}
+\item A {\em Reporter} collects a news item from primary lead, secondary agency or continuity of events. She / he explores the details and prepares the facts.
+\item The {\em Reporter} then composes the facts in terms of a {\em Story} filling in the necessary and auxiliary parts.
+\item Once composed, the {\em Reporter} submits the {\em Story} for review.
+\item The {\em Manager} of the {\em Division} retrieves the submitted {\em Story} and takes one of the actions as follows:
+\begin{itemize}
+
+\item Review \& edit and approve the {\em Story} for publication.
+\item File review comments on the {\em Story} for the {\em Reporter} (who wrote the {\em Story}) to make revisions. The {\em Reporter} then revises the {\em Story} and submits again for review.
+\item Review and disapprove the {\em Story}. This {\em Story} will not be published.
+
+\end{itemize}
+
+\item Once the cut-off time for the day is over, the {\em Associate Editor} of the {\em Division} will preview the approved stories and prepare the page/s for the {\em Division}. Stories selected for a day during pagination are marked published and will not be selected again. Other stories continue to remain in {\bf SMS} for possible publication in future.
+
+\item The {\em Editor} reviews the page/s for compliance to the policies of \textsf{Newspaper House}. If a {\em Story} is found to be non-compliant, the {\em Editor} may ask the corresponding {\em Associate Editor} to revise or replace the {\em Story}.
+
+\item Once all stories become compliant, the {\em Editor} adds the {\em Editorial} and orders publication.
+
+\item The newspaper goes to press.
+\end{itemize}
+
+Every action in {\bf SMS} generates notification (by email) to all concerned stakeholders. 
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+\newpage
+
+%{\huge \bf Solutions:}
+
+{\em Part~\ref{Use_Cases}}: The Use-cases of {\bf SMS} are:
+
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\
+\includegraphics[scale=0.8]{"Include/Use-Case Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+{\bf Note:}
+\begin{itemize}
+\item We have grouped the use-cases based on the actors. Hence union of Associate Editor and Editor, and union of Reporter, Associate Editor and Editor are shown as two actors.
+\item We assume that whenever an author (typically, Reporter) is notified, her / his Manager will also be notified. Hence their $<<$include$>>$ relationship.
+\item Compose and Revise use-cases imply editing. Hence Edit use-case has an $<<$extend$>>$ relationship with them.
+\item Implied use-cases like management of collection of stories in a story-board etc, have been skipped.
+\item Use-cases related to Systems and Administration have been ignored.
+\end{itemize} 
+
+\newpage
+{\em Part~\ref{Select_Classes}}: Class diagram for {\bf \em Story}:
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|lllll|l|p{7cm}|} \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{\bf Story} 			& & \multicolumn{1}{|c|}{\em Remarks}\\
+\multicolumn{5}{|c|}{\{{\em Abstract}\} } 	& & \multicolumn{1}{|c|}{\em }\\ \cline{1-5} \cline{7-7}
+-- & id 		& : & String 				& & & Auto-generated\\
+-- & title 		& : & String 				& & & Set by Create, Change by EditAndSubmit \\
+-- & place 		& : & String 				& & & Set by Create, Change by EditAndSubmit \\
+-- & date 		& : & Date 					& & & Set by Create \\
+-- & time 		& : & Time 					& & & Set by Create \\
+-- & source 	& : & String \{optional\} 	& & & Set by Create, Change by EditAndSubmit \\
+-- & author 	& : & String \{optional\} 	& & & Set by Create \\
+-- & body 		& : & Text 					& & & Set to null by Create, Change by EditAndSubmit \\
+-- & comments 	& : & Text 					& & & Set to null by Create, Change by ReviewAndApprove \\
+\# & division 	& : & Division 				& & & Set by Create \\
+\# & /type 		& : & String 				& & & Set by Create -- derived from division \\
+\# & nature 	& : & String 				& & & Set by Create, Change by ReviewAndApprove \\
+-- & status 	& : & Bool[5] 				& & & Set 5 flags to False by Create. Changes by state-chart  \\
+-- & \underline{numberOfApprovedStories} & : & \underline{Int} & & &  \\
+-- & \underline{numberOfPublishedStories} & : & \underline{Int} & & &  \\ \cline{1-5} \cline{7-7}
+ + & \multicolumn{4}{l|}{\underline{Create(title: String, place: String, date:Date, }} & & Create factory for Story \\ 
+   & \multicolumn{4}{l|}{\quad \quad \underline{time: Time, division: Division, nature: String}} & &  \\ 
+   & \multicolumn{4}{l|}{\quad \quad \underline{source: String = "", author: Employee = 0): Story *}} & &  \\
+ + & \multicolumn{4}{l|}{Display(employee: Employee): void}  & & Display all fields \\ 
+ + & \multicolumn{4}{l|}{EditAndSubmit(author: Employee): void} & & Edit \& save-as-draft or Edit \& submit \\ 
+ + & \multicolumn{4}{l|}{ReviewAndApprove(reviewer: Manager): void} & & Review, Populate comments \& Approve or Disapprove \\
+ + & \multicolumn{4}{l|}{Select(manager: Manager): void}  & & Select a story for pagination \\
+ + & \multicolumn{4}{l|}{Publish(editor: Editor): void}   & & Publish or Reject the story \\ \cline{1-5} \cline{7-7}
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+The status values are:
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|} \hline
+\multicolumn{1}{|c}{\bf Index} & \multicolumn{1}{|c}{\bf Status} & \multicolumn{1}{|c|}{\bf Remarks} \\ \hline
+0 & draft & If the story is being edited \\
+1 & submitted & If the story is ready for review, selection, publication \\
+2 & approved & If the story has been approved \\
+3 & selected & If the story is selected for pagination \\
+4 & published & If the story is published \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+There are three specializations -- {\bf Editorial}, {\bf News}, and {\bf Feature} -- of {\bf \em Story}. These are concrete classes. 
+
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\
+\includegraphics[scale=0.5]{"Include/Class Inheritance Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+The division and nature of a story is set at the time of Create() as:
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|p{7cm}|} \hline
+\multicolumn{1}{|c}{\bf Specialization} & \multicolumn{1}{|c}{\bf Division} & \multicolumn{1}{|c|}{\bf Nature} \\ \hline
+{\bf Editorial} & Editorial & Editorial, SpecialNews, or LettersFromReaders \\
+{\bf News} 		& News		& Political, Social, or Economic \\
+{\bf Feature} 	& Feature	& EventReport, Critique, CelebrityInterview, MatchReport, TeamAnalysis, or Statistics\\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\newpage
+{\em Part~\ref{State-chart}}: The story has the following states that change according to the state-chart:
+
+\begin{center}
+\begin{tabular}{|l|} \hline
+\includegraphics[scale=0.8]{"Include/State-Chart Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|l|c|c|c|c|c|l|} \hline
+\multicolumn{1}{|c}{\bf Present} &
+\multicolumn{1}{|c}{\bf Action} &
+\multicolumn{1}{|c}{\bf Next} &
+\multicolumn{1}{|c}{\bf Actor} &
+\multicolumn{5}{|c}{\bf Status} &
+\multicolumn{1}{|c|}{\bf Method} \\ \cline{5-9}
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\bf draft} &
+\multicolumn{1}{|c}{\bf submitted} &
+\multicolumn{1}{|c}{\bf approved} &
+\multicolumn{1}{|c}{\bf selected} &
+\multicolumn{1}{|c}{\bf published} &
+\multicolumn{1}{|c|}{\bf } \\ \hline
+null 			& Create & \textsf{New} & Author & False & False & False & False & False & Create() \\ \hline
+\textsf{New} 	& Edit 	& \textsf{Draft} & Author & True & False & False & False & False & EditAndSubmit() \\ \hline
+\textsf{Draft} 	& Edit 	& \textsf{Draft} & Author & True & False & False & False & False & EditAndSubmit() \\ \hline
+\textsf{Draft} 	& Submit 	& \textsf{Submitted} & Author & False & True & False & False & False & EditAndSubmit() \\ \hline
+\textsf{Submitted} 	& Edit 	& \textsf{Draft} & Author & True & False & False & False & False & EditAndSubmit() \\ \hline
+\textsf{Submitted} 	& Disapprove 	& \textsf{Draft} & Manager & True & False & False & False & False & ReviewAndApprove() \\ \hline
+\textsf{Submitted} 	& Approve 	& \textsf{Approved} & Manager & False & True & True & False & False & ReviewAndApprove() \\ \hline
+\textsf{Approved} 	& Select 	& \textsf{Selected} & Manager & False & True & True & True & False & Select() \\ \hline
+\textsf{Selected} 	& Publish 	& \textsf{Published} & The Editor & False & True & True & True & True & Publish() \\ \hline
+\textsf{Selected} 	& Publish 	& \textsf{Submitted} & The Editor & False & True & False & False & False & Publish() \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+
+{\bf Note:}
+\begin{itemize}
+\item The state of a Story is implicitly managed by the Bool status vector. The above table illustrates the relationship.
+\item We have not shown the Discarded or Deleted states for a story that does not eventually get published. The same may be included. Of course, this will need one more Bool status flag.
+\end{itemize} 
+
+\newpage
+{\em Part~\ref{Class-Diagram}}: The Class diagram for {\bf SMS}:
+
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\ 
+\includegraphics[scale=0.75]{"Include/Class Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+{\bf Note:}
+\begin{itemize}
+\item An abstract class to describe {\bf \em Non-Editorial Division} has been introduced to easily model the fact that all divisions except the {\bf Editorial Division} is managed by an {\bf Associate Editor} while the {\bf Editorial Division} is managed by the {\bf Editor}.
+
+\item The {\bf Story-Board} class is a mere collection of story objects for maintenance. It is a container that has references to the objects, but does not own them. Hence the use of weak aggregation. In contrast, {\bf Newspaper} is a strong aggregation of {\bf \em Story} objects because it {\em carries} them.
+
+\item There could have been a {\bf \em Manager} class between {\bf Reporter} and {\bf Associate Editor} classes on the hierarchy to manage {\bf \em Non-Editorial Division}. We have merged it with {\bf Associate Editor}.
+
+\item The {\bf \em Story} is shown as an association class between {\bf \em Story} and {\bf Reporter} because only a reporter working for a division can do a story for that division.
+
+\item We could also show a subset relation between \textsf{works\_for} and \textsf{manages} (of Associate Editor) because to manage a division an Associate Editor needs to work for it. Note that the same holds trivially for Editor and Editorial Division.
+
+\item \textsf{works\_for} may be shown as an association between {\bf \em Division} and {\bf \em Employee}.
+\end{itemize} 
+
+\newpage
+{\em Part~\ref{Sequence-Diagrams}}:
+
+\begin{center}
+\includegraphics[scale=0.8]{"Include/Sequence Diagram".jpg}
+\end{center}
+
+{\bf Note:}
+\begin{itemize}
+\item We have arbitrarily captured an instance with author / reporter {\em e1} and her manager {\em m1}. {\em e1} writes a story {\em s1} that {\em m1} reviews.
+
+\item {\em wait()} is assumed to depict arbitrary delay in synchronization.
+
+\item {\bf Story-Board} is a singleton collection of all unpublished story objects. Hence it does not need a name.
+\end{itemize} 
+
+\newpage
+{\em Part~\ref{Design Patterns}}:
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|p{9cm}|p{2.3cm}|l|} \hline
+\multicolumn{1}{|c}{\bf Situation} & \multicolumn{1}{|c}{\bf Pattern} & \multicolumn{1}{|c|}{\bf Marks} \\ \hline
+Generate story objects of appropriate specialization. & Abstract Factory, Factory Method & 0 mark -- Not covered in class \\ \hline
+Browse various lists of story objects, reporters, pages etc., Display collection of story objects. & Iterator & 2 marks \\ \hline
+There is only one editor and only one story-board for the \textsf{Newspaper House}. Each division is also unique. & Singleton & 1 mark \\ \hline
+Manager asks Reporter to Revise story, Editor asks Associate Editor to Revise or Replace Story. Asking for the action and the execution of the action are separated in time as is needed in Command Pattern. & Command Pattern & 2 marks \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\end{document}

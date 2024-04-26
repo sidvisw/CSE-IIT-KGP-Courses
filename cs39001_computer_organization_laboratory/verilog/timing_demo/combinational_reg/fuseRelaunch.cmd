@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "H:/Siddhartha/Hardware Security Course/combinational_reg/test_isim_beh.exe" -prj "H:/Siddhartha/Hardware Security Course/combinational_reg/test_beh.prj" "work.test" "work.glbl" 

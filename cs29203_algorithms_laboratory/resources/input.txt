@@ -1,0 +1,2 @@
+Hello everyone, Welcome to Algorithms-1!
+After running the code compare if the input and output files are exactly the same in your system.

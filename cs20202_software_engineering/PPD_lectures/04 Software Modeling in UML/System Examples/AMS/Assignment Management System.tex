@@ -1,0 +1,663 @@
+\documentclass{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{marginnote}
+%\usepackage{longtable}
+
+%\usepackage{color}
+%\usepackage{listings}
+
+\usepackage{framed} % PPD
+\usepackage{textpos} % PPD
+\usepackage{rotating} %PPD - For rotated text in a cell in table
+
+\renewcommand{\baselinestretch}{1}
+\renewcommand{\arraystretch}{1.3}
+
+%you may inactive the following four commands, then it will become appearance of book pages
+
+%\setlength{\topmargin}{-0.1in}
+%\setlength{\textheight}{8.3in}
+%\setlength{\oddsidemargin}{0.1 in}
+%\setlength{\textwidth}{6.2 in}
+
+\setlength{\topmargin}{-0.4in}
+%\setlength{\topmargin}{-0.1in}
+\setlength{\textheight}{9in}
+%\setlength{\textheight}{8.3in}
+\setlength{\evensidemargin}{-0.4 in}
+\setlength{\oddsidemargin}{-0.4 in}
+%\setlength{\oddsidemargin}{0.1 in}
+\setlength{\textwidth}{7 in}
+%\setlength{\textwidth}{6.2 in}
+
+%%%%%%%%%%%%%
+
+\newtheorem{fact}{Fact}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{property}{Property}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{Conjecture}
+
+\newcommand{\notsim}{{\, \not \sim \,}}
+
+\newcommand{\F}{\ensuremath{\mathbb F}}
+\newcommand{\Z}{\ensuremath{\mathbb Z}}
+\newcommand{\N}{\ensuremath{\mathbb N}}
+\newcommand{\Q}{\ensuremath{\mathbb Q}}
+\newcommand{\R}{\ensuremath{\mathbb R}}
+\newcommand{\C}{\ensuremath{\mathbb C}}
+
+\newcommand{\done}{\hfill $\Box$ }
+\newcommand{\rmap}{\stackrel{\rho}{\leftrightarrow}}
+\newcommand{\mys}{\vspace{0.15in}}
+
+\newcommand{\ebu}{{\bf{e}}}
+\newcommand{\Abu}{{\bf{A}}}
+\newcommand{\Bbu}{{\bf{B}}}
+
+\newcommand{\abu}{{\bf{a}}}
+\newcommand{\abuj}{{\bf{a_j}}}
+\newcommand{\bbu}{{\bf{b}}}
+\newcommand{\vbu}{{\bf{v}}}
+\newcommand{\ubu}{{\bf{u}}}
+\newcommand{\dbu}{{\bf{d}}}
+\newcommand{\tbu}{{\bf{t}}}
+\newcommand{\cbu}{{\bf{c}}}
+\newcommand{\kbu}{{\bf{k}}}
+\newcommand{\hbu}{{\bf{h}}}
+\newcommand{\sbu}{{\bf{s}}}
+\newcommand{\wbu}{{\bf{w}}}
+\newcommand{\xbu}{{\bf{x}}}
+\newcommand{\ybu}{{\bf{y}}}
+\newcommand{\zbu}{{\bf{z}}}
+
+
+\newcommand{\corres}{\leftrightarrow}
+
+\newcommand{\zero}{{\bf{0}}}
+\newcommand{\one}{{\bf{1}}}
+\newcommand{\nodiv}{{\, \not| \,}}
+\newcommand{\notequiv}{{\,\not\equiv\, }}
+
+%%%%%%%%%%%%%%
+
+\def\comb#1#2{{#1 \choose #2}}
+\newcommand{\ls}[1]
+    {\dimen0=\fontdimen6\the\font\lineskip=#1\dimen0
+     \advance\lineskip.5\fontdimen5\the\font
+     \advance\lineskip-\dimen0
+     \lineskiplimit=0.9\lineskip
+     \baselineskip=\lineskip
+     \advance\baselineskip\dimen0
+     \normallineskip\lineskip\normallineskiplimit\lineskiplimit
+     \normalbaselineskip\baselineskip
+     \ignorespaces}
+
+\def\stir#1#2{\left\{#1 \atop #2 \right\}}
+\def\dsum#1#2{#1 \atop #2 }
+\def\defn{\stackrel{\triangle}{=}}
+
+%%%%%%%%
+
+
+
+\begin{document}
+
+\thispagestyle{plain}
+\setcounter{page}{1}
+\begin{center}
+{\huge {\bf Indian Institute of Technology, Kharagpur}} 
+
+{\LARGE {\em Department of Computer Science and Engineering}}
+\vspace{0.4cm}
+
+{\Large \bf Software Engineering (CS 20006), Spring 2015-16} \vspace{0.1cm}
+
+{\large \bf Assignment Management System (AMS)} \vspace{0.1cm}
+
+{\large \em Req. Spec., and Outline of Analysis, Design, and Testplan} %\vspace{0.3cm}
+\end{center}
+
+\hspace{-1cm}
+
+\begin{tabular}{l}
+\hspace{16cm} \\ \hline 
+\end{tabular}
+\begin{enumerate}
+
+%\begin{footnotesize}
+
+\item A course on \textsf{Software Construction} in IIT wants to manage the assignments to {\em Students}, the submissions of assignments by {\em Students}, and the evaluations of the submissions through an {\bf Assignment Management System (AMS)}. The requirement specifications for the system are as follows:
+
+\begin{enumerate}
+\item Participants of the course are: 
+
+\begin{itemize}
+
+\item One {\em Instructor}. She / he is identified by an {\em Employee Code}, and has {\em Name}, {\em Email} and {\em Mobile Number}.
+\item 5 or more {\em Teaching Assistants (TA)}. Every {\em TA} is identified by a {\em Roll No}, and has {\em Name}, {\em Email} and {\em Mobile Number}.
+\item 100 or more {\em Students}. Every {\em Student} is identified by a {\em Roll No}, and has {\em Name}, {\em Department}, {\em Hall}, {\em Email} and {\em Mobile Number}. 
+
+\end{itemize}
+
+\item The responsibilities of the {\em Instructor} include:
+
+\begin{itemize}
+\item {\em Set-up}: Design and set up the assignments, decide on the date that an assignment is to be assigned to the {\em Students}, and on the date of submission for the assignment. Also decide on a {\em Coordinating TA} for an assignment.
+\item {\em Allocation}: Allocate {\em Students} to {\em TA}. Every {\em Student} has one allocated {\em TA}.
+\item {\em Approve}: Approve / Disapprove extensions for submissions beyond the submission date and decide on the penalty.
+\item {\em Compilation}: Compile the evaluations (as performed by the {\em TA}s) and publish the final scores of every assignments on {\bf AMS}. 
+\end{itemize}
+
+\item The responsibilities of a {\em TA} include:
+
+\begin{itemize}
+\item {\em Mentor}: Mentor and manage the {\em Students} allocated to the {\em TA}. She / he is the primary support for the allocated {\em Students} before she / he should approach the {\em Instructor}.
+\item {\em Upload}: The {\em Coordinating TA} of an assignment uploads an assignment as set by the {\em Instructor} and sets up the required {\em Assign} and {\em Submission Dates} on the {\bf AMS}. 
+\item {\em Download}: Download from the {\bf AMS} and archive the submissions for the {\em Students} allocated to the {\em TA}. This needs to be done after the submission date in every assignment.
+\item {\em Evaluate}: Peruse the submissions, discuss with the respective {\em Students} for clarifications, take demonstrations (if relevant), and evaluate.
+\item {\em Report}: Report the evaluations to {\em Instructor}. Requests for submission date extension with full credit, on grounds of medical or personal exigencies, are also to be reported after proper authentication. 
+
+Further, {\em TA}s are responsible for reporting Disciplinary actions (like plagiarism), if any.
+\end{itemize}
+
+\item The responsibilities of a {\em Student} include:
+
+\begin{itemize}
+\item {\em Perform}: Complete every assignment within the submission date and submit to {\bf AMS}.
+\item {\em Appeal}: Appeal to the {\em Instructor} for permission for special submission without penalty. Every appeal needs to go through the respective {\em TA} and must be authenticated by her / him.
+\item {\em Demonstrate}: Discuss and demonstrate the submission to the allocated {\em TA}.
+\end{itemize}
+
+\item An {\em Assignment}:
+
+\begin{itemize}
+\item {\em Ownership}: Is to be completed individually by every {\em Student}.
+\item {\em Type}: Is one the following types:
+\begin{itemize}
+\item {\em Programming Assignment}: The assignment has one {\em Problem} that asks to write a single program, specifies the language for coding (like C / C++ / Java), and has a single submission date.
+\item {\em Systems Assignment}: The assignment asks to develop a System. It has one or more {\em Problem/s}. Each {\em Problem} is about a component module that builds up the System and has a separate submission date. No coding language is specified for such assignments.
+\end{itemize}
+
+\item {\em Assign Date}: Has an {\em Assign Date} on which it is given to the {\em Students}. 
+\item {\em Submission Date}: Has a {\em Submission Date} by which it is to be completed and submitted. For a {\em Systems Assignment} every constituent {\em Problem} has a separate {\em Submission Date} but a common {\em Assign Date}.
+\item {\em Marks}: Every {\em Problem} in an assignment has specified maximum marks. 
+\item {\em Coordinator}: By turn a {\em TA} is allocated by the {\em Instructor} as a coordinator for an assignment. She / he manages the upload, and the dates for the assignment.
+\end{itemize}
+
+\item A {\em Submission} :
+
+\begin{itemize}
+\item {\em Action}: Is performed for an {\em Assignment}, by a {\em Student} on a {\em Date}.
+\item {\em Valid}: Is {\em valid} if it is submitted within the {\em Submission Date} of the corresponding assignment. {\em Valid} submissions carry full credit.
+\item {\em Late}: Is {\em late} if it is done within 3 days from the {\em Submission Date} of the corresponding assignment. {\em Late} submissions carry 10\% penalty.
+\item {\em Special}: Is {\em special} if it is done within 7 days from the {\em Submission Date} of the corresponding assignment. A {\em Student} needs to {\em appeal} for {\em Special} submissions to the {\em Instructor} through the {\em TA}. {\em Special} submissions are allowed on grounds of medical or personal exigency and carry no penalty.
+\item {\em Invalid}: Is {\em invalid} if it is not submitted within 3 days from the the {\em Submission Date} of the corresponding assignment and has not been granted extension as a {\em Special Submission}. {\em Invalid} submissions carry zero credit.
+\end{itemize}
+No submission is allowed before the {\em Assign Date} of the submission.
+
+\item The {\em Work flow} in the course is as follows: 
+
+\begin{itemize}
+\item The {\em Instructor} designs an {\em Assignment} and mails it to the {\em Coordinating TA}.
+\item The {\em Coordinating TA} uploads the {\em Assignment} to the system and sets the corresponding {\em Assign} and  {\em Submission Dates}. 
+\item Once an {\em Assignment} has been set, {\bf AMS} sends an email notification to all {\em Students}, {\em TA}s and the {\em Instructor} about the {\em Assignment}.
+\item The {\em Students} completes the {\em Assignment} and uploads the solution to {\bf AMS}. 
+\item Once the {\em Submission Dates} for an {\em Assignment} is over, {\bf AMS} sends an email notification each to every {\em TA} with the respective list of completed submissions ({\em Students'} roll numbers are mentioned) by the {\em Students} allocated to the {\em TA}. Respective students are carbon-copied on the email. The {\em Instructor} is copied on every notification.
+\item Every {\em TA} downloads the respective submissions, discusses with the {\em Student}s, checks demonstrations, and evaluates the solution.
+\item Once a {\em TA} completes her / his evaluations for an {\em Assignment}, {\bf AMS} sends an email notification to the {\em Instructor} with the {\em TA} on the carbon-copy. {\em TA} should complete the evaluations after 4 days from the {\em Submission Date} and before 10 days from it. 
+\item The {\em Instructor} on receipt of completion report from all the {\em TA}s compiles the scores for an {\em Assignment} and publishes on the {\bf AMS}.
+\item If a {\em Student} misses to submit by the {\em Submission Date}, but submits within 3 days from that, she / he is penalized by 10\%. On such submissions, {\bf AMS} sends an email notification to the {\em TA} and the {\em TA} would similarly evaluate the submission and report to the {\em Instructor}.
+\item A {\em Student} may appeal for an extension on grounds of medical or personal exigency. The {\em TA} would scrutinize the appeal and report to the {\em Instructor}, if authentic. {\bf AMS} will send an email notification for the same. As the {\em Instructor} approves or disapproves the appeal, accordingly the {\em Student} and the {\em TA} are notified. If the appeal is approved, the process of submission and evaluation is followed.
+\end{itemize}
+
+\end{enumerate}
+
+You have been assigned as the software engineer for the {\bf AMS}. You are required to analyse the specifications, design the system (using UML and DP) and also prepare the test plan. Answer the following questions in this background.
+
+\begin{enumerate}
+\item \label{Use_Cases} Identify the actions in {\bf AMS} and design the Use-Case Diagrams for the actions. Identify the actors, specify their types, and mark the relationships between the actors. Show the \texttt{$<<$include$>>$}, \texttt{$<<$extend$>>$}, and generalization relationships of the use-cases. \hfill [{\bf 4+4=8}]
+
+\item \label{Select_Classes} Design Class Diagrams for {\em Assignments} \& {\em Submissions}. Show the attributes and  operations with their associated properties. Highlight specialization hierarchies, if any. \hfill [{\bf 4+4=8}]
+
+\item \label{Class-Diagram} Complete the  Class Diagram of {\bf AMS} showing all other classes (in addition to Question~\ref{Select_Classes}) by  their respective brief Diagrams (with name and key attributes). For the entire collection of classes (that is, including {\em Assignments} and {\em Submissions}) show the associations, aggregations / compositions, generalization / specialization, and abstract / concrete etc. \hfill [{\bf 6}]
+
+\item \label{State-Chart} Design the State-Chart Diagrams for {\em Assignments} and {\em Submissions}. \hfill [{\bf 2+2=4}]
+
+\item \label{Sequence-Diagrams} Design Sequence Diagrams for the actions in {\bf AMS} as specified in the Work flow. \hfill [{\bf 10}]
+
+\item \label{Design-Pattern} Identify and justify the use of Iterator, Singleton and Command DPs in {\bf AMS}. \hfill [{\bf 2*3=6}]
+%\item Outline your implementation plan with reference to the following (justify every choice): \hfill [{\bf 2+1=3}]
+%\begin{enumerate}
+%\item Choice of architecture and platform (including servers, if any)
+%\item Choice of language and third-party libraries
+%\end{enumerate}
+
+\item \label{Test-Plan} Prepare a test plan for {\bf AMS} to perform black-box tests. Clearly mark the scenarios for Unit Testing and Integration Testing. \hfill [{\bf 4+4=8}]
+
+\end{enumerate}
+
+{\bf Answers:}
+
+{\em Part~\ref{Use_Cases}}: The Use-cases of {\bf AMS} are:
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\ \hline
+%\includegraphics[scale=0.8]{"Include/Problem-State-Chart Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+{\em Part~\ref{Select_Classes}}: Class diagrams for {\bf \em Assignment} and {\bf \em Submission}:
+
+An Assignment can contain one or more Problems. Hence we need an auxiliary {\bf Problem} class to define {\bf \em  Assignment} class.
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|lllll|l|p{7cm}|} \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{\bf \textsf{Problem}} 			& & \multicolumn{1}{|c|}{\em Remarks}\\ \cline{1-5} \cline{7-7}
+-- & \textsf{id} 			& : & String 	& & & Auto-generated\\
+-- & \textsf{assignment}	& : & String 	& & & Set by Create(). \textsf{assignment} = \textsf{Assignment.id} \\
+-- & \textsf{submissionDate}& : & Date 		& & & Set by Create() \\
+-- & \textsf{marks}	 		& : & Int		& & & Set by Create() \\ 
+-- & \textsf{body} 			& : & Text 		& & & Set by Create() \\ 
+-- & /\textsf{status} 		& : & Bool[3] 	& & & Set by Create(). \textsf{status[0]} = True, rest False. Changes by TRIGGER\\ \cline{1-5} \cline{7-7}
+ + & \multicolumn{4}{l|}{\underline{Create(assignment: String, submissionDate: Date, }} & & Constructor for \textsf{Problem} \\ 
+   & \multicolumn{4}{l|}{\quad \quad \underline{marks: Int, body: Text, language: String =""): Problem *}} & &  \\
+ + & \multicolumn{4}{l|}{Display(): void}  & & Display all fields \\ 
+ \cline{1-5} \cline{7-7}
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+The \textsf{status} values are derived as:
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|} \hline
+\multicolumn{1}{|c}{\bf Index} & \multicolumn{1}{|c}{\bf Status} & \multicolumn{1}{|c|}{\bf Remarks} \\ \hline
+0 & new 		& The problem is created as a part of \textsf{assignment} that contains it \\
+1 & open 		& The problem is open, if \textsf{today} $\geq$ \textsf{assignment.assignDate} and \textsf{today} $\leq$ \textsf{submissionDate} \\
+2 & closed 		& The problem is closed, if \textsf{today} $>$ \textsf{submissionDate} \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|lllll|l|p{7cm}|} \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{\bf \textsf{Assignment}} 			& & \multicolumn{1}{|c|}{\em Remarks}\\
+\multicolumn{5}{|c|}{\{{\em Abstract}\} } 	& & \multicolumn{1}{|c|}{\em }\\ \cline{1-5} \cline{7-7}
+-- & \textsf{id} 			& : & String 				& & & Auto-generated\\
+-- & \textsf{setter} 		& : & String 				& & & Set by Create(). \textsf{setter} = \textsf{Instructor.eCode} \\
+-- & \textsf{assignDate} 	& : & Date 					& & & Set by Create() \\
+-- & \textsf{coordinator}	& : & String 				& & & Set by Create(). \textsf{coordinator} = \textsf{TA.roll} \\
+-- & \textsf{nProblems}		& : & Int 					& & & Set by Create(). Number of problems in the assignment \\
+-- & \textsf{problems} 		& : & String[1..\textsf{nProblems}]			& & & Set by Create(). \textsf{problem} = \textsf{Problem.id} \\
+-- & \textsf{status} 		& : & Bool[4] 				& & & Set by Create(). \textsf{status[0]} = True, rest False. Changes by state-chart  \\ \cline{1-5} \cline{7-7}
+ + & \multicolumn{4}{l|}{\underline{Create(setter: String, assignDate: Date, coordinator: TA,}} & & Create factory for Assignment \\ 
+   & \multicolumn{4}{l|}{\quad \quad \underline{nProblems: Int, problems: String[]): Assignment *}} & &  \\
+ + & \multicolumn{4}{l|}{Display(): void}  & & Display all fields \\ 
+ + & \multicolumn{4}{l|}{Upload(coordinator: String): void} & & Upload for assigning to students. \textsf{coordinator} = \textsf{TA.roll} \\ 
+ \cline{1-5} \cline{7-7}
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+The \textsf{status} values are derived as:
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|} \hline
+\multicolumn{1}{|c}{\bf Index} & \multicolumn{1}{|c}{\bf Status} & \multicolumn{1}{|c|}{\bf Remarks} \\ \hline
+0 & new 		& The assignment has been created by Instructor and mailed to Coordinating TA \\
+1 & uploaded 	& The assignment has been uploaded by Coordinating TA \\
+2 & open 		& The assignment is open, if at least one of the Problems is open \\
+3 & closed 		& The assignment is closed, if all the Problems are closed \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+There are two specializations -- {\bf ProgrammingAssignment} and {\bf SystemsAssignment} -- of {\bf \em Assignment}. These are concrete classes. 
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|lllll|l|p{7cm}|} \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{\bf \textsf{ProgrammingAssignment}} 	& & \multicolumn{1}{|c|}{\em Remarks}\\ \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{Base {\bf \textsf{Assignment}}} 		& & \textsf{nProblems} = 1 by construction \\ \cline{1-5} \cline{7-7}
+-- & \textsf{language} 		& : & String				& & & Set by Create(). One of \{C, C++, Java\} \\ 
+\cline{1-5} \cline{7-7}
+ + & \multicolumn{4}{l|}{\underline{Create(setter: String, assignDate: Date, coordinator: TA,}} & & Constructor for ProgrammingAssignment \\ 
+   & \multicolumn{4}{l|}{\quad \quad \underline{nProblems: Int, problems: String[], }} & &  \\
+   & \multicolumn{4}{l|}{\quad \quad \underline{language: String): Assignment *}} & &  \\
+ \cline{1-5} \cline{7-7}
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|lllll|l|p{7cm}|} \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{\bf \textsf{SystemsAssignment}} 	& & \multicolumn{1}{|c|}{\em Remarks}\\ \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{Base {\bf \textsf{Assignment}}} 		& & \textsf{nProblems} $\geq$ 1 by construction \\ \cline{1-5} \cline{7-7}
+ + & \multicolumn{4}{l|}{\underline{Create(setter: String, assignDate: Date, coordinator: TA,}} & & Constructor for SystemsAssignment \\ 
+   & \multicolumn{4}{l|}{\quad \quad \underline{nProblems: Int, problems: String[]): Assignment *}} & &  \\
+ \cline{1-5} \cline{7-7}
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|lllll|l|p{7cm}|} \cline{1-5} \cline{7-7}
+\multicolumn{5}{|c|}{\bf \textsf{Submission}} 			& & \multicolumn{1}{|c|}{\em Remarks}\\
+\multicolumn{5}{|c|}{\{{\em Abstract}\} } 	& & \multicolumn{1}{|c|}{\em }\\ \cline{1-5} \cline{7-7}
+-- & \textsf{id} 		& : & String 	& & & Auto-generated\\
+-- & \textsf{student}	& : & String 	& & & Set by Create(). \textsf{student} = \textsf{Student.roll} \\
+-- & \textsf{problem}	& : & String 	& & & Set by Create(). \textsf{problem} = \textsf{Problem.id} \\
+-- & \textsf{date} 		& : & Date \{optional\} 		& & & The date of problem submission. Set to null by Create(), finalized by FinalizeSubmission()  \\
+-- & \textsf{body} 		& : & Text \{optional\} 	& & & The solution as submitted. Set by Create(), edited by EditSubmission() \\
+-- & \textsf{marks} 	& : & Int			 		& & & Set to 0 by Create(). Set by EvalAndReport() \\
+-- & \textsf{lateSubmissionAppeal} & : & Bool 		& & & Set to False by Create(). Set by AppealLateSubmission() \\
+-- & \textsf{lateSubmissionReason}	& : & String \{optional\} 	& & & Set to null by Create(). Set by AppealLateSubmission() \\
+-- & \textsf{lateSubmissionForward} & : & Bool 		& & & Set to False by Create(). Set by EvalAndReport() \\
+-- & \textsf{lateSubmissionApproval} & : & Bool 		& & & Set to False by Create(). Set by AllowLateSubmission() \\
+-- & /\textsf{credit} 	& : & Int 	& & & Percentage of credit (max = 100). Set to 0 by Create(). Changes by state-chart \\
+-- & /\textsf{status} 	& : & Bool[8] 	& & & Set by Create(). \textsf{status[0]} = True, rest False. Changes by state-chart \\
+\cline{1-5} \cline{7-7}
+ + & \multicolumn{4}{l|}{\underline{Create(student: String, problem: String, }} & & Constructor for Submission \\ 
+   & \multicolumn{4}{l|}{\quad \quad \underline{body: Text = ""): Submission *}} & &  \\
+ + & \multicolumn{4}{l|}{Display(): void}  & & Display all fields \\ 
+ + & \multicolumn{4}{l|}{EditSubmission(): void} & & \textsf{body} of Submission edited by \textsf{student}  \\ 
+ + & \multicolumn{4}{l|}{FinalizeSubmission(): void}  & & Submission done (finalized) by \textsf{student} -- no more edits allowed \\ 
+ + & \multicolumn{4}{l|}{AppealLateSubmission(reason: String): void}  & & \textsf{student} appeals for late submission with reason \\ 
+ + & \multicolumn{4}{l|}{EvalAndReport(marks: Int, lateSubmission: Bool): void}  & & TA of \textsf{student} reports the evaluation and / or response to appeal for late submission with reason \\ 
+ + & \multicolumn{4}{l|}{AllowLateSubmission(): void}  & & Instructor allows late submission \\ 
+\cline{1-5} \cline{7-7}
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+The \textsf{status} and \textsf{credit} values are derived as:
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|l|l|r|} \hline
+\multicolumn{1}{|c}{\bf Index} & \multicolumn{1}{|c}{\bf Status} & \multicolumn{3}{|c}{\bf Remarks} & \multicolumn{1}{|c|}{\bf Credit} \\ \hline
+0 & draft 		& \multicolumn{3}{|p{8.5cm}|}{The submission has been created but not submitted} & 0 \\ \cline{3-5}
+  &  			& \textsf{lateSubmissionAppeal} & \textsf{lateSubmissionForward} & \textsf{lateSubmissionApproval} & 0 \\ \cline{3-5}
+1 & appealed	& True							& False							 & False & 0 \\ \cline{3-5}
+2 & forwarded	& True							& True							 & False & 0 \\ \cline{3-5}
+3 & approved	& True							& True							 & True & 0 \\ \cline{3-5}
+4 & valid	 	& \multicolumn{3}{|p{8.5cm}|}{The submission has been done and \textsf{date} $\leq$ \textsf{problem.submissionDate}} & 100 \\
+5 & late	 	& \multicolumn{3}{|p{8.5cm}|}{The submission has been done, \textsf{date} $>$ \textsf{problem.submissionDate}, \textsf{date} $\leq$ \textsf{problem.submissionDate} + 3, and \textsf{lateSubmissionApproval} = False} & 90 \\
+6 & special		& \multicolumn{3}{|p{8.5cm}|}{The submission has been done, \textsf{date} $>$ \textsf{problem.submissionDate}, \textsf{date} $\leq$ \textsf{problem.submissionDate} + 7, and \textsf{lateSubmissionApproval} = True} & 100 \\ 
+7 & invalid		& \multicolumn{3}{|p{8.5cm}|}{The submission has been done, \textsf{date} $>$ \textsf{problem.submissionDate} + 3 and \textsf{lateSubmissionApproval} = False} & 0 \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+{\em Part~\ref{Class-Diagram}}: The Class diagram for {\bf AMS}:
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\ \hline
+%\includegraphics[scale=0.8]{"Include/Problem-State-Chart Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+{\em Part~\ref{State-Chart}}: The {\bf Problem} has the following states that change according to the state-chart:
+
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\ \hline
+%\includegraphics[scale=0.8]{"Include/Problem-State-Chart Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|l|c|c|c|l|} \hline
+\multicolumn{1}{|c}{\bf Present} &
+\multicolumn{1}{|c}{\bf Action} &
+\multicolumn{1}{|c}{\bf Next} &
+\multicolumn{1}{|c}{\bf Actor} &
+\multicolumn{3}{|c}{\bf Status} &
+\multicolumn{1}{|c|}{\bf Method \& Condition} \\ \cline{5-7}
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\bf new} &
+\multicolumn{1}{|c}{\bf open} &
+\multicolumn{1}{|c}{\bf closed} &
+\multicolumn{1}{|c|}{\bf } \\ \hline
+null 			& Create 	& \textsf{New} 		& Instructor& True 	& False & False & Create() \& \textsf{today} $<$ \textsf{assignment.assignDate} \\ \hline
+\textsf{New}	& TRIGGER 	& \textsf{Open} 	& System 	& False & True 	& False & \textsf{today} $\geq$ \textsf{assignment.assignDate} \& \textsf{today} $\leq$ \textsf{submissionDate} \\ \hline
+\textsf{Open} 	& TRIGGER 	& \textsf{Closed} 	& System 	& False & False & True & \textsf{today} $>$ \textsf{submissionDate} \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+The {\bf \em Assignment} has the following states that change according to the state-chart:
+
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\ \hline
+%\includegraphics[scale=0.8]{"Include/Assignment-State-Chart Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|l|c|c|c|c|l|} \hline
+\multicolumn{1}{|c}{\bf Present} &
+\multicolumn{1}{|c}{\bf Action} &
+\multicolumn{1}{|c}{\bf Next} &
+\multicolumn{1}{|c}{\bf Actor} &
+\multicolumn{4}{|c}{\bf Status} &
+\multicolumn{1}{|c|}{\bf Method \& Condition} \\ \cline{5-8}
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\bf new} &
+\multicolumn{1}{|c}{\bf uploaded} &
+\multicolumn{1}{|c}{\bf open} &
+\multicolumn{1}{|c}{\bf closed} &
+\multicolumn{1}{|c|}{\bf } \\ \hline
+null 				& Create 	& \textsf{New} 		& Instructor& True 	& False & False & False & Create() \\ \hline
+\textsf{New} 		& Upload 	& \textsf{Uploaded}	& TA 		& False & True 	& False & False & Upload() \\ \hline
+\textsf{Uploaded} 	& TRIGGER 	& \textsf{Open} 	& System 	& False & False	& True 	& False & At least one problem is in open state\\ \hline
+\textsf{Open} 	& TRIGGER 	& \textsf{Closed} 		& System 	& False & False	& False & True & All problems are in closed state\\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+The {\bf \em Submission} has the following states that change according to the state-chart:
+
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\ \hline
+%\includegraphics[scale=0.8]{"Include/Submission-State-Chart Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|} \hline
+\multicolumn{1}{|c}{\bf Condition Name} & \multicolumn{1}{|c|}{\bf Condition Expression} \\ \hline
+{\em Cond 1} & \textsf{date} $\leq$ \textsf{problem.submissionDate} \\ \hline
+{\em Cond 2} & \textsf{date} $>$ \textsf{problem.submissionDate} \& \textsf{date} $\leq$ \textsf{problem.submissionDate} + 3 \\ \hline
+{\em Cond 3} & \textsf{date} $>$ \textsf{problem.submissionDate} + 3 \\ \hline
+{\em Cond 4} & \textsf{date} $>$ \textsf{problem.submissionDate} \& \textsf{date} $\leq$ \textsf{problem.submissionDate} + 7 \\ \hline
+{\em Cond 5} & \textsf{date} $>$ \textsf{problem.submissionDate} + 7 \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|l|l|l|l|c|c|c|c|c|c|c|c|p{4cm}|} \hline
+\multicolumn{1}{|c}{\bf Present} &
+\multicolumn{1}{|c}{\bf Action} &
+\multicolumn{1}{|c}{\bf Next} &
+\multicolumn{1}{|c}{\bf Actor} &
+\multicolumn{8}{|c}{\bf Status} &
+\multicolumn{1}{|c|}{\bf Method \& Condition} \\ \cline{5-12}
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\bf State} &
+\multicolumn{1}{|c}{\bf } &
+\multicolumn{1}{|c}{\begin{sideways}{\bf draft \quad}\end{sideways}} &
+\multicolumn{1}{|c}{\begin{sideways}{\bf appealed \quad}\end{sideways}} &
+\multicolumn{1}{|c}{\begin{sideways}{\bf forwarded \quad}\end{sideways}} &
+\multicolumn{1}{|c}{\begin{sideways}{\bf approved \quad}\end{sideways}} &
+\multicolumn{1}{|c}{\begin{sideways}{\bf valid \quad}\end{sideways}} &
+\multicolumn{1}{|c}{\begin{sideways}{\bf late \quad}\end{sideways}} &
+\multicolumn{1}{|c}{\begin{sideways}{\bf special \quad}\end{sideways}} &
+\multicolumn{1}{|c}{\begin{sideways}{\bf invalid \quad}\end{sideways}} &
+\multicolumn{1}{|c|}{\bf } \\ \hline
+\multicolumn{13}{|c|}{\bf Create} \\ \hline
+null 				& Create 	& \textsf{New} 		& Student	& T	& F & F & F & F & F & F & F & Create() \\ \hline
+
+\multicolumn{13}{|c|}{\bf Appeal for Extension} \\ \hline
+\textsf{New} 		& Appeal 	& \textsf{Appealed}	& Student	& T & T & F & F & F & F & F & F & AppealLateSubmission() \\ \hline
+\textsf{Appealed} 	& Forward 	& \textsf{Forwarded}& TA		& T & T & T & F & F	& F & F & F & EvalAndReport(True) \\ \hline
+\textsf{Appealed} 	& Forward 	& \textsf{Appealed} & TA		& T & T & F & F & F	& F & F & F & EvalAndReport(False) \\ \hline
+\textsf{Forwarded} 	& Approve 	& \textsf{Approved} & Instructor& T & T & T & T & F	& F & F & F & AllowLateSubmission(True) \\ \hline
+\textsf{Forwarded} 	& Approve 	& \textsf{Forwarded}& Instructor& T & T & T & F & F	& F & F & F & AllowLateSubmission(False) \\ \hline
+
+\multicolumn{13}{|c|}{\bf Edit} \\ \hline
+\textsf{New}		& Edit	 	& \textsf{New} 		& Student	& T & F & F & F & F & F & F & F & EditSubmission() \\ \hline
+\textsf{Appealed} 	& Edit	 	& \textsf{Appealed} & Student	& T & T & F & F & F & F & F & F & EditSubmission() \\ \hline
+\textsf{Forwarded} 	& Edit 	& \textsf{Forwarded}& Student 	& T & T & T & F & F & F & F & F & EditSubmission() \\ \hline
+\textsf{Approved} 	& Edit 	& \textsf{Approved} & Student	& T & T & T & T & F & F & F & F & EditSubmission() \\ \hline
+
+\multicolumn{13}{|c|}{\bf Submission} \\ \hline
+\textsf{New}		& Submit	 & \textsf{Valid} & Student	& F	& F & F & F & T & F & F & F & FinalizeSubmission() \& \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} \\ \hline
+
+\textsf{New}		& Submit	 & \textsf{Late} & Student	& F	& F & F & F & F & T & F & F & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} \& \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} + 3 \\ \hline
+
+\textsf{New}		& Submit	 & \textsf{Invalid} & Student	& F	& F & F & F & F & F & F & T & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} + 3 \\ \hline
+
+\textsf{Appealed}		& Submit	 & \textsf{Valid} & Student	& F	& T & F & F & T & F & F & F & FinalizeSubmission() \& \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} \\ \hline
+
+\textsf{Appealed}		& Submit	 & \textsf{Late} & Student	& F	& T & F & F & F & T & F & F & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} \& \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} + 3 \\ \hline
+
+\textsf{Appealed}		& Submit	 & \textsf{Invalid} & Student	& F	& T & F & F & F & F & F & T & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} + 3 \\ \hline
+
+\textsf{Forwarded}		& Submit	 & \textsf{Valid} & Student	& F	& T & T & F & T & F & F & F & FinalizeSubmission() \& \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} \\ \hline
+
+\textsf{Forwarded}		& Submit	 & \textsf{Late} & Student	& F	& T & T & F & F & T & F & F & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} \& \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} + 3 \\ \hline
+
+\textsf{Forwarded}		& Submit	 & \textsf{Invalid} & Student	& F	& T & T & F & F & F & F & T & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} + 3 \\ \hline
+
+\textsf{Approved}		& Submit	 & \textsf{Valid} & Student	& F	& T & T & T & T & F & F & F & FinalizeSubmission() \& \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} \\ \hline
+
+\textsf{Approved}		& Submit	 & \textsf{Special} & Student	& F	& T & T & T & F & F & T & F & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} \\ 
+&&&&&&&&&&&& \textsf{date} $\leq$ \textsf{problem.submissionDate} + 7 \\ \hline
+
+\textsf{Approved}		& Submit	 & \textsf{Invalid} & Student	& F	& T & T & T & F & F & F & T & FinalizeSubmission() \& \\
+&&&&&&&&&&&& \textsf{date} $>$ \textsf{problem.submissionDate} + 7 \\ \hline
+
+\multicolumn{13}{|c|}{\bf Timeout} \\ \hline
+\textsf{New} 		& TRIGGER 	& \textsf{Invalid} 	& System	& T	& F & F & F & F & F & F & T & \textsf{date} $>$ \textsf{problem.submissionDate} + 3 \\ \hline
+\textsf{Appealed} 	& TRIGGER 	& \textsf{Invalid}	& System	& T & T & F & F & F & F & F & T & \textsf{date} $>$ \textsf{problem.submissionDate} + 3 \\ \hline
+\textsf{Forwarded} 	& TRIGGER 	& \textsf{Invalid}	& System	& T & T & T & F & F	& F & F & T & \textsf{date} $>$ \textsf{problem.submissionDate} + 3 \\ \hline
+\textsf{Approved} 	& TRIGGER 	& \textsf{Invalid} 	& System	& T & T & T & T & F	& F & F & T & \textsf{date} $>$ \textsf{problem.submissionDate} + 7 \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+{\em Part~\ref{Sequence-Diagrams}}: The Sequence Diagram for major activities in {\bf AMS} are:
+\begin{center}
+\begin{tabular}{|l|} \hline
+\\ \hline
+%\includegraphics[scale=0.8]{"Include/Problem-State-Chart Diagram".jpg} \\ \hline
+\end{tabular}
+\end{center}
+
+{\em Part~\ref{Design-Pattern}}: The Design Patterns in {\bf AMS} are:
+
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|p{10cm}|p{2cm}|l|} \hline
+\multicolumn{1}{|c}{\bf Situation} & \multicolumn{1}{|c}{\bf Pattern} & \multicolumn{1}{|c|}{\bf Marks} \\ \hline
+Generate assignment objects of appropriate specialization. & Abstract Factory, Factory Method & 0 mark -- Not covered in class \\ \hline
+Browse / Display lists of assignments, problems in an assignment, students, TAs etc. & Iterator & 2 marks \\ \hline
+There is only one instructor & Singleton & 2 marks \\ \hline
+Instructor asks Coordinating TA to upload assignment, students appeal to TAs, TAs forward to instructor, etc. Asking for the action and the execution of the action are separated in time as is needed in Command Pattern. & Command & 2 marks \\ \hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+{\em Part~\ref{Test-Plan}}: 
+\begin{enumerate}
+\item {\bf Unit Testing}:
+\begin{enumerate}
+\item {\bf Testing for Classes}: 
+
+For every class tests need to be performed for:
+\begin{itemize}
+\item Constructor / Destructor / Copy Constructor / Copy Assignment Operator etc
+\item Member Functions
+\item Static Member Functions
+\end{itemize}
+In addition, some important scenarios for every class must be tested:
+\begin{itemize}
+
+\item Class Instructor: The class must be a singleton.
+\item Class TA 
+\item Class Student 
+\item Class Problem 
+\begin{itemize}
+\item Trigger (Time) based tests -- Before Assign Date,Between Assign Date and Submission Date, After Submission Date
+
+\end{itemize}
+\item Class Assignment 
+\begin{itemize}
+\item Test for Specializations 
+\item 
+\end{itemize}
+\item Class Submission 
+
+\end{itemize}
+\item {\bf Testing Sub-Systems}:
+\end{enumerate}
+
+\item {\bf Integration Testing}:
+\begin{enumerate}
+\item Login to {\bf AMS}
+
+\end{enumerate}
+\end{enumerate}
+
+%\begin{enumerate}
+
+
+\end{enumerate}
+
+\end{document}

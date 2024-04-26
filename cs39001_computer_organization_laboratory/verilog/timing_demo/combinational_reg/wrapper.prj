@@ -1,0 +1,4 @@
+verilog work "half_addr.v"
+verilog work "full_addr.v"
+verilog work "adder_struct.v"
+verilog work "wrapper.v"
